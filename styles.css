@@ -76,8 +76,19 @@ h1 em,h2 em{color:var(--gold-light);font-weight:400}
 .category-heading .eyebrow{margin-bottom:8px}
 .category-heading h2{margin-bottom:0;font-size:clamp(2.1rem,3.3vw,3.2rem)}
 .category-rule{flex:1;height:1px;margin-bottom:12px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.62}
-.menu-grid{display:grid;grid-template-columns:1fr;gap:28px 24px}
-.menu-card{display:flex;flex-direction:column;min-width:0;transition:transform .4s}
+.menu-grid{display:flex;gap:24px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-color:var(--gold) var(--surface);scrollbar-width:thin;padding-bottom:14px}
+.menu-grid:focus-visible{outline-offset:4px}
+.menu-grid.is-expanded{display:grid;grid-template-columns:1fr;overflow:visible;scroll-snap-type:none;padding-bottom:0}
+.menu-card{display:flex;flex:0 0 100%;flex-direction:column;min-width:0;scroll-snap-align:start;transition:transform .4s}
+.menu-grid.is-expanded .menu-card{flex-basis:auto}
+.carousel-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:20px}
+.carousel-navigation{display:flex;align-items:center;gap:14px}
+.carousel-arrow{display:inline-grid;place-items:center;width:44px;height:44px;border:1px solid var(--gold);background:transparent;color:var(--gold-light);font-size:1.25rem;line-height:1;cursor:pointer;transition:background .2s,color .2s}
+.carousel-arrow:hover{background:var(--gold);color:var(--bg)}
+.carousel-count{min-width:78px;color:var(--muted);font-size:.82rem;text-align:center;white-space:nowrap}
+.carousel-view-all{min-height:44px;padding:8px 0;border:0;border-bottom:1px solid var(--gold);background:transparent;color:var(--gold-light);font:inherit;font-size:.85rem;cursor:pointer}
+.carousel-view-all:hover{color:var(--text)}
+.menu-category.is-expanded .carousel-navigation{display:none}
 .menu-card__media{overflow:hidden;aspect-ratio:7/5;border:1px solid var(--border);border-radius:6px;background:#211a15;transition:border-color .4s,box-shadow .4s}
 .menu-card img{width:100%;height:100%;object-fit:cover;transition:transform .42s cubic-bezier(.22,1,.36,1)}
 .menu-card__body{display:flex;flex:1;flex-direction:column;align-items:flex-start;min-height:150px;padding:20px 2px 0}
@@ -93,17 +104,20 @@ h1 em,h2 em{color:var(--gold-light);font-weight:400}
 .contact-details p:last-child{border:0}
 .contact-details span{color:var(--gold-light);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
 .contact-details strong{color:var(--text);font-weight:500}
+.contact-details a{overflow-wrap:anywhere;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+.contact-details a:hover{color:var(--gold-light)}
 .site-footer{padding-top:56px;background:#0b0a09}
 .footer-top{display:flex;flex-direction:column;gap:32px;padding-bottom:45px}
-.footer-top p{margin:17px 0 0;color:var(--muted);font-size:.9rem}
+.footer-top p{max-width:54ch;margin:17px 0 0;color:var(--muted);font-size:.9rem}
+.footer-top p+p{margin-top:10px}
 .footer-top nav{display:flex;flex-wrap:wrap;gap:12px 26px;align-content:start}
 .footer-top nav a{font-size:.87rem}
 .footer-top nav a:hover{color:var(--gold-light)}
 .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding-block:19px;border-top:1px solid var(--border);color:#9e9283;font-size:.76rem}
 @media(hover:hover) and (pointer:fine){.button:hover{background:var(--gold-light);border-color:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.18)}.site-nav>a:not(.button):hover::after{transform:scaleX(1)}.menu-card:hover{transform:translateY(-3px)}.menu-card:hover .menu-card__media{border-color:#947548;box-shadow:0 12px 25px rgba(0,0,0,.16)}.menu-card:hover img{transform:scale(1.05)}}
-@media(min-width:640px){.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-grid{grid-template-columns:1fr 1fr;align-items:center}.hero-visual{height:500px}.hero-visual img{max-height:none}.contact-grid{grid-template-columns:1fr 1fr}.footer-top{flex-direction:row;justify-content:space-between}}
+@media(min-width:640px){.menu-card{flex-basis:calc((100% - 24px)/2)}.menu-grid.is-expanded{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-grid{grid-template-columns:1fr 1fr;align-items:center}.hero-visual{height:500px}.hero-visual img{max-height:none}.contact-grid{grid-template-columns:1fr 1fr}.footer-top{flex-direction:row;justify-content:space-between}}
 @media(min-width:900px){.menu-toggle{display:none}.site-nav,.site-nav.is-open{position:static;display:flex;flex-direction:row;align-items:center;gap:clamp(16px,2.2vw,34px);padding:0;border:0;background:transparent}.site-nav>a:not(.button){padding:8px 0}.site-nav .button{margin:0}.about-grid{grid-template-columns:1fr 1fr;gap:70px}}
-@media(min-width:1024px){.menu-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero-grid{grid-template-columns:1.08fr .92fr;gap:clamp(50px,7vw,110px)}.hero-visual{height:610px}}
+@media(min-width:1024px){.menu-card{flex-basis:calc((100% - 72px)/4)}.menu-grid.is-expanded{grid-template-columns:repeat(4,minmax(0,1fr))}.hero-grid{grid-template-columns:1.08fr .92fr;gap:clamp(50px,7vw,110px)}.hero-visual{height:610px}}
 @media(max-width:639px){.hero-visual{height:440px;margin-right:16px;box-shadow:12px 12px 0 #1b1713}.hero-note{margin-top:38px}.contact-details{padding:17px 21px}.menu-card__body{min-height:135px}.category-heading{gap:15px}.category-rule{display:none}}
 @media(max-width:359px){.brand strong{font-size:.95rem}.brand small{font-size:.43rem}.brand-mark{font-size:1.65rem}.menu-card__body{padding-inline:14px}.menu-card h3{font-size:1.12rem}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}.button:hover,.menu-card:hover,.menu-card:hover img{transform:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-grid{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}.button:hover,.menu-card:hover,.menu-card:hover img{transform:none}}
